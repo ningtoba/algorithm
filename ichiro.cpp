@@ -4,7 +4,7 @@ using namespace std;
 struct content {
 	string title, author;
 	float price;
-	int yearReleased;
+	int yearReleased, id, rent;
 };
 
 struct node {
@@ -12,7 +12,7 @@ struct node {
 	node *next;
 };
 
-class linklist {
+class linklistf {
 	private:
 		node *head, *tail, *prev, *temp;
 	public:
@@ -29,6 +29,8 @@ class linklist {
 			temp->data.yearReleased = mYearReleased;
 			temp->next = NULL;
 			
+			//add hashing to generate id
+			
 			if(head == NULL) {
 				head = temp;
 				tail = temp;
@@ -37,6 +39,11 @@ class linklist {
 				tail = tail->next;
 			}
 		}
+		
+		//show first and choose which to delete based on title
+//		void delete() {
+//			
+//		}
 		
 		void display() {
 			temp = head;
@@ -51,37 +58,19 @@ class linklist {
 		
 };
 
-//void add() {
-//	if(head==null) {
-//		
-//	}
-//}
-
-//void delete() {
-//	
-//}
-//
-//void display() {
-//	
-//}
-//
-//void search() {
-//	
-//}
-
 int main() {
 	node *head, *temp,*prev;
 	string mTitle, mAuthor;
 	float mPrice;
 	int mYearReleased, choice;
-	linklist b;
+	linklistf b;
 	cout<<" --------------------------------------"<<endl;
 	cout<<" | MMU LIBRARY BOOK MANAGEMENT SYSTEM |"<<endl;
 	cout<<" --------------------------------------"<<endl;
 	cout<<" | 1. Add new book                    |"<<endl;
 	cout<<" | 2. Delete a book                   |"<<endl;
 	cout<<" | 3. Search a book                   |"<<endl;
-	cout<<" | 4. Display lists of book           |"<<endl;
+	cout<<" | 4. Display all book                |"<<endl;
 	cout<<" | 5. Exit Program                    |"<<endl;
 	cout<<" --------------------------------------"<<endl;
 	cout<<"Select your operation from the list : ";
@@ -133,3 +122,6 @@ int main() {
 //and then product id from name+author+releasedate
 
 //if possible, show rented book by students
+//void rent() {
+//	set rent = 1;
+//}
