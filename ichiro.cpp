@@ -1,5 +1,6 @@
 #include <iostream>
-#include <string.h>
+#include <string>
+#include <stdlib.h>
 using namespace std;
 
 struct content {
@@ -17,7 +18,7 @@ class linklistf {
 	private:
 		node *head, *tail, *prev, *temp;
 	public:
-		linklist() {
+		linklistf() {
 			head = NULL;
 			tail = NULL;
 		}
@@ -29,11 +30,16 @@ class linklistf {
 			temp->data.price = mPrice;
 			temp->data.yearReleased = mYearReleased;
 			temp->data.qty = mQty;
+//			string s1 = to_string(rand()%1000+1000); 
+//		    string s2 = to_string(mYearReleased); 
+		  
+		    // Concatenate both strings 
+//		    string s = s1 + s2; 
+		  
+		    // Convert the concatenated string 
+		    // to integer 
+			temp->data.id = rand()%1000+1000;
 			temp->next = NULL;
-			
-			//add hashing to generate id
-			temp->data.id = hash(mTitle);
-			
 			if(head == NULL) {
 				head = temp;
 				tail = temp;
@@ -43,16 +49,6 @@ class linklistf {
 			}
 		}
 		
-		int hash(const char* str) {
-		    int hash = 0;
-		    int c = 0;
-		
-		    while (c < strlen(str)) {
-		        hash += (int)str[c] << (int)str[c+1];
-		        c++;
-		    }
-		    return hash;
-		}
 		
 		//show first and choose which to delete based on title
 //		void delete() {
@@ -83,7 +79,7 @@ int main() {
 	cout<<" --------------------------------------"<<endl;
 	cout<<" | MMU LIBRARY BOOK MANAGEMENT SYSTEM |"<<endl;
 	cout<<" --------------------------------------"<<endl;
-	cout<<" | 1. Add new book                    |"<<endl; //add
+	cout<<" | 1. Add new book                    |"<<endl; //add plus random plus year hashing
 	cout<<" | 2. Buy a book                      |"<<endl; //delete
 	cout<<" | 3. Borrow a book                   |"<<endl; //borrow
 	cout<<" | 5. Return a book                   |"<<endl; //return
@@ -94,19 +90,20 @@ int main() {
 	cout<<"Select your operation from the list : ";
 	cin>>choice;
 	
-	while(choice != 5) {
+	while(choice != 8) {
 		if(choice == 1 ) {
+			fflush(stdin);
 			cout<<"Add title of book : ";
-			cin>>mTitle;
+			getline(cin, mTitle);
 			cout<<"Author of the book : ";
-			cin>>mAuthor;
+			getline(cin, mAuthor);
 			cout<<"Price of the book : ";
 			cin>>mPrice;
 			cout<<"Year of book released : ";
 			cin>>mYearReleased;
-			cout<<"enter quantity of book : ";
+			cout<<"Enter quantity of book : ";
 			cin>>mQty;
-			b.add(mTitle, mAuthor, mPrice, mYearReleased);
+			b.add(mTitle, mAuthor, mPrice, mYearReleased, mQty);
 			cout<<"\nSelect your operation from the list : ";
 			cin>>choice;
 		} 
