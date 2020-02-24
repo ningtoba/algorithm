@@ -8,7 +8,7 @@ struct content {
 	string title, author;
 	float price;
 	int yearReleased, qty, id;
-	bool rent;
+	bool rent = 0;
 };
 
 //node have a struct content as data, and can reach rest of data inside content struct, node to point to next node
@@ -54,16 +54,16 @@ public:
 	
 	//function buy to buy book, will confirm and ask for quantity wanted to buy
 	void buy() {
-		if(temp->data.qty != NULL) {
+		if(temp->data.qty > 0) {
 			char choice;
 			int qty;
 			cout << "Would you like to buy this book? [Y/N] : ";
 			cin >> choice;
-			cout<<"How many to buy for this book? : ";
-			cin>>qty;
 			switch (choice) {
 			case 'Y':
 			case 'y':
+				cout<<"How many to buy for this book? : ";
+				cin>>qty;
 				temp->data.qty-=qty;
 				cout<<"Book "<<temp->data.title<<" has been bought"<<endl;
 				cout<<"Quantity left is "<<temp->data.qty<<endl;
@@ -82,9 +82,8 @@ public:
 	//function hashing to create a unique id for book and sorting
 	int hash(const int year) {
 		int hash = 0;
-		int c = 0;
 		//random number generated with front truncated add with year
-		hash = (rand()*100) + 1000000 + year;
+		hash = (rand()%100*1000) + 100 + year;
 		return hash;
 	}
 
@@ -106,20 +105,24 @@ public:
 	//search inside linked list based on title given
 	void search(string title) {
 		temp = head;
-		if (temp->data.title.compare(title) == 0) {
-			found = true; 	//if found, print the detail of the specific book
-			if (found) {
-				cout << "Book title : " << temp->data.title << endl;
-				cout << "Book author : " << temp->data.author << endl;
-				cout << "Book price : " << temp->data.price << endl;
-				cout << "Book year released : " << temp->data.yearReleased << endl;
-				cout << "Quantity available : " << temp->data.qty << endl
-					 << endl;
+		while(temp->next != NULL) {
+			if ((title.compare(temp->data.title)) == 0) {
+				found = true; 	//if found, print the detail of the specific book
+				if (found) {
+					cout << "Book title : " << temp->data.title << endl;
+					cout << "Book author : " << temp->data.author << endl;
+					cout << "Book price : " << temp->data.price << endl;
+					cout << "Book year released : " << temp->data.yearReleased << endl;
+					cout << "Quantity available : " << temp->data.qty << endl
+						 << endl;
+				}
+				found = false;
+			} else if (temp == NULL) {
+				cout << "Book not available";
+				temp = temp->next;
+			} else {
+				temp = temp->next;	
 			}
-		}
-		else if (temp == NULL) {
-			cout << "Book not available";
-			temp = temp->next;
 		}
 	}
 	
@@ -148,8 +151,8 @@ public:
 		char choice;
 		temp = head;
 		// Display Rented Books
-		cout<<"Book rented"<<endl;
-		while (temp->next != NULL) {
+		cout<<"---Book Borrowed---"<<endl;
+		while (temp!= NULL) {
 			if (temp->data.rent) {
 				cout << "Book ID : " << temp->data.id << endl;
 				cout << "Book title : " << temp->data.title << endl;
@@ -157,16 +160,19 @@ public:
 				cout << "Book price : " << temp->data.price << endl;
 				cout << "Book year released : " << temp->data.yearReleased << endl;
 				temp = temp->next;
+			} else {
+				temp = temp->next;
 			}
 		}
 		// Choice to return book
-		cout << "\nWould you like to return a book? [Y/N]";
+		cout << "\nWould you like to return a book? [Y/N]: ";
 		cin >> choice;
 		while (choice == 'Y' || choice == 'y') {
 			if (choice == 'Y' || choice == 'y') {
 				// Title of book to return
+				fflush(stdin);
 				cout << "Enter the title of the book you would like to return : ";
-				cin >> title;
+				getline(cin, title);
 				temp = head;
 				// Update book qty
 				while (temp != NULL) {
@@ -313,7 +319,7 @@ public:
 	void printList() {
 		temp = head;
 		while (temp != NULL) {
-			cout <<"ID: "<< head->data.id << " Title: " << head->data.title<<endl;
+			cout <<"ID: "<< temp->data.id << " Title: " << temp->data.title<<endl;
 			temp = temp->next;
 		}
 	}
@@ -398,10 +404,6 @@ int main() {
 		cout << "Select your operation from the list : ";
 		cin >> choice;
 	}
-	//	node a = new node;
-	//	cin>>a->data.title;
-
-	//create while loop to accept until exit
 }
 
 //program can add, delete, display, search
@@ -424,5 +426,19 @@ int main() {
 //void generateDocs() {
 //
 //}
+
+//1
+//hello world
+//ichiro
+//23
+//2000
+//5
+//1
+//wow world
+//ning
+//45
+//2010
+//6
+
 
 
