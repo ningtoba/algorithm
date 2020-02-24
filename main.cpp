@@ -183,8 +183,8 @@ public:
 					temp = temp->next;
 				}
 			}
-			cout << "Would you like to return another book? [Y/N]";
-			cin >> choice;
+			cout<<"Book returned successfully"<<endl;
+			break;
 		}
 	}
 
@@ -405,40 +405,6 @@ int main() {
 		cin >> choice;
 	}
 }
-
-//program can add, delete, display, search
-
-//will use linked list
-
-//sorting when display
-//linear search for search
-//hashing to produce book code
-
-//book will accept name, price, author, release date
-//and then product id from name+author+releasedate
-
-//if possible, show rented book by students
-//void rent() {
-//	set rent = 1;
-//}
-
-//also can generate text file for report/sticker
-//void generateDocs() {
-//
-//}
-
-//1
-//hello world
-//ichiro
-//23
-//2000
-//5
-//1
-//wow world
-//ning
-//45
-//2010
-//6
 
 
 
