@@ -54,12 +54,12 @@ public:
 	
 	//function buy to buy book, will confirm and ask for quantity wanted to buy
 	void buy() {
-		if(temp->data.qty != NULL) {
+		if(temp->data.qty > 0) {
 			char choice;
 			int qty;
 			cout << "Would you like to buy this book? [Y/N] : ";
 			cin >> choice;
-			cout<<"How many to buy for this book? : ";
+			cout<<"How many would you like to buy? : ";
 			cin>>qty;
 			switch (choice) {
 			case 'Y':
@@ -106,6 +106,7 @@ public:
 	//search inside linked list based on title given
 	void search(string title) {
 		temp = head;
+		while(temp != NULL){
 		if (temp->data.title.compare(title) == 0) {
 			found = true; 	//if found, print the detail of the specific book
 			if (found) {
@@ -121,6 +122,7 @@ public:
 			cout << "Book not available";
 			temp = temp->next;
 		}
+		}
 	}
 	
 	//function borrow to make book as rented and decrease quantity by one
@@ -134,7 +136,7 @@ public:
 			case 'y':
 				temp->data.rent = true;
 				temp->data.qty--;
-				cout<<"Book has been borrow"<<endl;
+				cout<<"Book has been borrowed"<<endl;
 				cout<<"Quantity left is "<<temp->data.qty<<endl;
 				break;
 			default: 
@@ -148,9 +150,9 @@ public:
 		char choice;
 		temp = head;
 		// Display Rented Books
-		cout<<"Book rented"<<endl;
-		while (temp->next != NULL) {
-			if (temp->data.rent) {
+		cout<<"Books rented"<<endl;
+		while (temp != NULL) {
+			if (temp->data.rent == true) {
 				cout << "Book ID : " << temp->data.id << endl;
 				cout << "Book title : " << temp->data.title << endl;
 				cout << "Book author : " << temp->data.author << endl;
@@ -166,7 +168,8 @@ public:
 			if (choice == 'Y' || choice == 'y') {
 				// Title of book to return
 				cout << "Enter the title of the book you would like to return : ";
-				cin >> title;
+				fflush(stdin);
+				getline(cin, title);
 				temp = head;
 				// Update book qty
 				while (temp != NULL) {
@@ -378,7 +381,7 @@ int main() {
 		}
 		else if (choice == 6) {
 			b.sort();
-			b.printList();
+			b.display();
 		}
 		else if (choice == 7) {
 			cout << "Thanks for using our program!";
@@ -414,15 +417,3 @@ int main() {
 
 //book will accept name, price, author, release date
 //and then product id from name+author+releasedate
-
-//if possible, show rented book by students
-//void rent() {
-//	set rent = 1;
-//}
-
-//also can generate text file for report/sticker
-//void generateDocs() {
-//
-//}
-
-
