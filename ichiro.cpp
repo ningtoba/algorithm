@@ -1,12 +1,15 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
+#include <sstream>
+#include <iomanip>
 using namespace std;
 
 struct content {
 	string title, author;
 	float price;
-	int yearReleased, qty, id, rent;
+	int yearReleased, qty, id;
+	bool rent;
 };
 
 struct node {
@@ -51,9 +54,9 @@ class linklistf {
 		
 		
 		//show first and choose which to delete based on title
-//		void delete() {
-//			
-//		}
+		void buy() {
+			
+		}
 		
 		void display() {
 			temp = head;
@@ -64,6 +67,22 @@ class linklistf {
 				cout<<"Book price : "<<temp->data.price<<endl;
 				cout<<"Book year released : "<<temp->data.yearReleased<<endl;
 				cout<<"Quantity available : "<<temp->data.qty<<endl<<endl;
+				temp=temp->next;
+			}
+		}
+		
+		void list() {
+			temp = head;
+			cout<<left<<setw(15)<<"Book ID"<<setw(15)<<"|Book title"<<setw(15)<<"|Book author"<<setw(15)<<"|Book price"<<setw(15)<<"|Year released"<<setw(15)<<"|Quantity"<<endl;
+			cout<<"----------------------------------------------------------------------------------------"<<endl;
+			while(temp!=NULL) {
+//				cout<<"Book ID    |Book title\t|Book author\t|Book price\t|Year released\t|Quantity"<<endl;
+				cout<<left<<setw(15)<<temp->data.id<<"|"<<setw(14)<<temp->data.title<<"|"<<setw(14)<<temp->data.author<<"|"<<setw(14)<<temp->data.price<<"|"<<setw(14)<<temp->data.yearReleased<<"|"<<setw(14)<<temp->data.qty<<endl;
+//				cout<<"Book title : "<<temp->data.title<<endl;
+//				cout<<"Book author : "<<temp->data.author<<endl;
+//				cout<<"Book price : "<<temp->data.price<<endl;
+//				cout<<"Book year released : "<<temp->data.yearReleased<<endl;
+//				cout<<"Quantity available : "<<temp->data.qty<<endl<<endl;
 				temp=temp->next;
 			}
 		}
@@ -104,19 +123,19 @@ int main() {
 			cout<<"Enter quantity of book : ";
 			cin>>mQty;
 			b.add(mTitle, mAuthor, mPrice, mYearReleased, mQty);
-			cout<<"\nSelect your operation from the list : ";
-			cin>>choice;
 		} 
 //		else if (choice == 2) {
 //			b.buy();
 //		} 
 		else if (choice == 4) {
-			b.display();
+			b.list();
 			cout<<"\nSelect your operation from the list : ";
 			cin>>choice;
 		} else {
 			return 0;
 		}
+		cout<<"\nSelect your operation from the list : ";
+		cin>>choice;
 	}
 //	node a = new node;
 //	cin>>a->data.title;
@@ -151,3 +170,13 @@ int main() {
 //void generateDocs() {
 //	
 //}
+
+
+//1
+//asdf
+//wer
+//123
+//234
+//345
+//4
+
